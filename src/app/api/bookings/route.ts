@@ -22,7 +22,7 @@ export async function GET() {
   try {
     const data = await fs.readFile(dataFilePath, 'utf8');
     return NextResponse.json(JSON.parse(data));
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to read bookings' }, { status: 500 });
   }
 }
@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     await fs.writeFile(dataFilePath, JSON.stringify(bookings, null, 2));
     
     return NextResponse.json({ success: true, booking: newBooking });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to save booking' }, { status: 500 });
   }
 }
@@ -57,7 +57,7 @@ export async function PATCH(request: Request) {
     const data = await fs.readFile(dataFilePath, 'utf8');
     const bookings = JSON.parse(data);
     
-    const index = bookings.findIndex((b: any) => b.id === id);
+    const index = bookings.findIndex((b: { id: string }) => b.id === id);
     if (index !== -1) {
       bookings[index].status = status;
       await fs.writeFile(dataFilePath, JSON.stringify(bookings, null, 2));
@@ -65,7 +65,7 @@ export async function PATCH(request: Request) {
     }
     
     return NextResponse.json({ error: 'Booking not found' }, { status: 404 });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to update booking' }, { status: 500 });
   }
 }

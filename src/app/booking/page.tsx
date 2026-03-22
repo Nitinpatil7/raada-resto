@@ -32,7 +32,7 @@ export default function BookingPage() {
       
       setFormData({ name: "", phone: "", date: "", time: "", guests: "2" });
       window.location.href = waUrl;
-    } catch (error) {
+    } catch {
       alert("There was an error saving your booking. Please try again later.");
     }
   };
