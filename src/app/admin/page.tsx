@@ -3,8 +3,19 @@
 import { useState, useEffect } from "react";
 import { Coffee, CheckCircle, XCircle, Clock } from "lucide-react";
 
+type Booking = {
+  id: string;
+  name: string;
+  phone: string;
+  date: string;
+  time: string;
+  guests: string;
+  status: 'pending' | 'confirmed' | 'rejected';
+  createdAt: string;
+};
+
 export default function AdminPage() {
-  const [bookings, setBookings] = useState<any[]>([]);
+  const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -14,9 +25,9 @@ export default function AdminPage() {
   const fetchBookings = async () => {
     try {
       const res = await fetch('/api/bookings');
-      const data = await res.json();
+      const data: Booking[] = await res.json();
       // Sort by newest first
-      setBookings(data.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
+      setBookings(data.sort((a: Booking, b: Booking) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
     } catch (error) {
       console.error("Failed to fetch bookings:", error);
     } finally {
@@ -24,7 +35,7 @@ export default function AdminPage() {
     }
   };
 
-  const updateStatus = async (booking: any, status: string) => {
+  const updateStatus = async (booking: Booking, status: string) => {
     try {
       await fetch('/api/bookings', {
         method: 'PATCH',
