@@ -1,0 +1,22 @@
+[
+  {
+    "id": "1774169943966",
+    "name": "manish",
+    "phone": "1234569807",
+    "date": "2026-03-24",
+    "time": "20:30",
+    "guests": "5",
+    "status": "confirmed",
+    "createdAt": "2026-03-22T08:59:03.966Z"
+  },
+  {
+    "id": "1774170599469",
+    "name": "rohit",
+    "phone": "8238959529",
+    "date": "2026-03-24",
+    "time": "19:30",
+    "guests": "4",
+    "status": "rejected",
+    "createdAt": "2026-03-22T09:09:59.469Z"
+  }
+]
